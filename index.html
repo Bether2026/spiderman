@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡El Cumple de Benjamín!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       OPENING SCREEN
+  ════════════════════════════════════════ -->
+  <section id="opening" class="screen active">
+    <div class="web-bg"></div>
+    <div class="spider-paper-wrap">
+      <img src="Spider_papel.jpg" alt="Spider-Man saliendo" class="spider-paper" id="paperSpider" />
+    </div>
+    <div class="opening-content">
+      <p class="opening-pre">Una misión especial te espera…</p>
+      <h1 class="opening-title">¡SPIDEY<br/>NECESITA<br/>TU AYUDA!</h1>
+      <button class="btn-web" id="btnStart">
+        <span class="btn-web-label">¡ACEPTAR MISIÓN!</span>
+        <span class="btn-web-shine"></span>
+      </button>
+    </div>
+    <div class="web-corner top-left"></div>
+    <div class="web-corner top-right"></div>
+    <canvas id="webCanvas"></canvas>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TRANSITION OVERLAY
+  ════════════════════════════════════════ -->
+  <div id="transitionOverlay">
+    <div class="crack-lines"></div>
+    <img src="Spider.png" alt="Spider-Man" class="transition-spider" />
+    <div class="transition-text">¡AL RESCATE!</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MAIN EXPERIENCE
+  ════════════════════════════════════════ -->
+  <div id="mainExperience" class="hidden">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="heroSection">
+      <div class="hero-bg">
+        <img src="Spider_scudo.jpg" alt="fondo" class="hero-bg-img" />
+        <div class="hero-bg-overlay"></div>
+        <div class="city-silhouette"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">¡CUMPLEAÑOS!</div>
+        <h2 class="hero-name">Benjamín</h2>
+        <div class="hero-age-ring">
+          <span class="hero-age-num">8</span>
+          <span class="hero-age-label">años</span>
+        </div>
+        <p class="hero-tagline">¡El nuevo héroe de la ciudad te invita a su fiesta!</p>
+        <div class="web-divider"></div>
+      </div>
+      <img src="Spider.png" alt="Spider-Man" class="hero-spidey" id="heroSpidey"/>
+    </section>
+
+    <!-- COUNTDOWN SECTION -->
+    <section class="section countdown-section" id="countdownSection">
+      <div class="section-web-deco"></div>
+      <h3 class="section-title">⚡ CUENTA REGRESIVA ⚡</h3>
+      <p class="section-sub">La misión comienza en…</p>
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="cd-box" id="cd-days">
+          <span class="cd-num">--</span>
+          <span class="cd-label">Días</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box" id="cd-hours">
+          <span class="cd-num">--</span>
+          <span class="cd-label">Horas</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box" id="cd-mins">
+          <span class="cd-num">--</span>
+          <span class="cd-label">Min</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-box" id="cd-secs">
+          <span class="cd-num">--</span>
+          <span class="cd-label">Seg</span>
+        </div>
+      </div>
+      <div class="event-info-strip">
+        <div class="einfo-item">
+          <span class="einfo-icon">📅</span>
+          <span>Jueves 25 de junio, 2026</span>
+        </div>
+        <div class="einfo-item">
+          <span class="einfo-icon">🕔</span>
+          <span>17:00 hs</span>
+        </div>
+        <div class="einfo-item">
+          <span class="einfo-icon">📍</span>
+          <span>Club Atlético Monterverde, Claypole</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINIGAME SECTION -->
+    <section class="section game-section" id="gameSection">
+      <h3 class="section-title">🕷 ¡ATRAPA A LOS VILLANOS! 🕷</h3>
+      <p class="section-sub">Ayudá a Spider-Man antes de la fiesta</p>
+      <div class="game-stats">
+        <div class="stat-box">Puntos: <span id="gameScore">0</span></div>
+        <div class="stat-box">Tiempo: <span id="gameTimer">30</span>s</div>
+        <div class="stat-box">Vidas: <span id="gameLives">❤️❤️❤️</span></div>
+      </div>
+      <div class="game-arena" id="gameArena">
+        <canvas id="gameCanvas"></canvas>
+        <div class="game-crosshair" id="gameCrosshair"></div>
+        <div class="game-overlay" id="gameOverlay">
+          <div class="game-overlay-content">
+            <img src="Spider.png" alt="Spidey" class="go-spider" />
+            <p class="go-text">¿Listo para atrapar villanos?</p>
+            <button class="btn-web btn-sm" id="btnStartGame">¡JUGAR!</button>
+          </div>
+        </div>
+        <div class="game-end" id="gameEnd" style="display:none">
+          <p class="ge-title">¡Misión Completada!</p>
+          <p class="ge-score">Villanos atrapados: <b id="finalScore">0</b></p>
+          <button class="btn-web btn-sm" id="btnRestartGame">Jugar de Nuevo</button>
+        </div>
+      </div>
+      <p class="game-hint">Tocá a los villanos antes de que escapen 🕸</p>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="section map-section" id="mapSection">
+      <h3 class="section-title">🗺 ¿CÓMO LLEGAR? 🗺</h3>
+      <p class="section-sub">Seguí la telaraña hasta el QG</p>
+      <div class="map-card">
+        <div class="map-location-badge">
+          <span class="mlb-icon">🏟</span>
+          <div>
+            <strong>Club Atlético Monterverde</strong>
+            <small>Río Dulce y Río Faitelufú, Don Orione, Claypole</small>
+          </div>
+        </div>
+        <div class="map-embed-wrap">
+          <iframe
+            src="https://maps.google.com/maps?q=Club+Atletico+Monterverde+Claypole&output=embed&z=16"
+            width="100%"
+            height="300"
+            style="border:0;border-radius:12px;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a class="btn-web btn-sm map-btn" href="https://maps.google.com/?q=Rio+Dulce+y+Rio+Faiteleufu+Don+Orione+Claypole" target="_blank">
+          📍 Abrir en Google Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- RSVP SECTION -->
+    <section class="section rsvp-section" id="rsvpSection">
+      <h3 class="section-title">🕸 CONFIRMÁ TU MISIÓN 🕸</h3>
+      <p class="section-sub">¡Spider-Man necesita saber si venís!</p>
+      <div class="rsvp-card">
+        <div class="rsvp-spidey-wrap">
+          <img src="Spider.png" alt="Spidey" class="rsvp-spidey" />
+        </div>
+        <form class="rsvp-form" id="rsvpForm">
+          <div class="form-group">
+            <label>Tu nombre, héroe</label>
+            <input type="text" id="rsvpName" placeholder="¿Cómo te llaman?" required />
+          </div>
+          <div class="form-group">
+            <label>¿Cuántos vienen?</label>
+            <div class="counter-wrap">
+              <button type="button" class="counter-btn" id="btnMinus">−</button>
+              <span class="counter-val" id="counterVal">1</span>
+              <button type="button" class="counter-btn" id="btnPlus">+</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>¿Podés venir?</label>
+            <div class="rsvp-toggle">
+              <button type="button" class="toggle-btn active" id="btnYes" data-val="yes">¡Claro que sí! 🕷</button>
+              <button type="button" class="toggle-btn" id="btnNo" data-val="no">No puedo 😔</button>
+            </div>
+          </div>
+          <button type="submit" class="btn-web">¡CONFIRMAR MISIÓN!</button>
+        </form>
+        <div class="rsvp-success" id="rsvpSuccess" style="display:none">
+          <div class="rs-check">✓</div>
+          <p class="rs-title">¡Confirmado, héroe!</p>
+          <p class="rs-msg">Spidey ya sabe que contás. ¡Hasta el 25 de junio!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EPIC CLOSE SECTION -->
+    <section class="section close-section" id="closeSection">
+      <div class="close-web-bg"></div>
+      <img src="Spider.png" alt="Spider-Man" class="close-spidey" id="closeSpidey" />
+      <div class="close-content">
+        <p class="close-pre">Con grandes poderes vienen…</p>
+        <h2 class="close-title">¡GRANDES<br/>FIESTAS!</h2>
+        <p class="close-date">25 · 06 · 2026 — 17:00 hs</p>
+        <p class="close-venue">Club Atlético Monterverde · Claypole</p>
+        <div class="close-web-sig">
+          <span>🕸 ¡Te esperamos, héroe! 🕸</span>
+        </div>
+        <button class="btn-web" id="btnMusic">
+          <span id="musicLabel">🔇 Activar Música</span>
+        </button>
+      </div>
+      <div class="fireworks" id="fireworks"></div>
+    </section>
+
+  </div><!-- /mainExperience -->
+
+  <!-- MUSIC -->
+  <audio id="bgMusic" loop>
+    <source src="https://assets.mixkit.co/music/preview/mixkit-games-worldbeat-466.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- FLOATING WEB SHOOTER -->
+  <button class="floating-music" id="floatingMusic" style="display:none" title="Música">🎵</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
